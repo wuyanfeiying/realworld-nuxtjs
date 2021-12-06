@@ -77,7 +77,9 @@
 
 <script>
 export default {
-  name: 'UserProfile'
+  name: 'UserProfile',
+  // 在路由匹配组件渲染之前回显执行中间件, 进行处理
+  middleware: 'autherticated'
 };
 </script>
 

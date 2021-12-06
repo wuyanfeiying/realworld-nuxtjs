@@ -23,7 +23,7 @@ export const actions = {
       // console.log(parsed.user);
       try {
         user = JSON.parse(parsed.user);
-        console.log(user);
+        // console.log(user);
       } catch (err) {
         console.log(err);
       }
