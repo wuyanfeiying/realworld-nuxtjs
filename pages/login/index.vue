@@ -64,8 +64,9 @@ export default {
       try {
         // 提交表单请求登录
         const { data } = this.isLogin ? await login({ user: this.user }) : await register({ user: this.user });
-        console.log(data);
+        // console.log(data);
         // 保存用户的登陆状态
+        this.$store.commit('setUser', data.user)
         // 跳转到首页
         this.$router.push('/');
       } catch (error) {
