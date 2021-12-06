@@ -21,13 +21,13 @@
 
           <form @submit.prevent="onSubmit">
             <fieldset v-if="!isLogin" class="form-group">
-              <input class="form-control form-control-lg" type="text" placeholder="Your Name" required />
+              <input v-model="user.username" class="form-control form-control-lg" type="text" placeholder="Your Name" required />
             </fieldset>
             <fieldset class="form-group">
               <input v-model="user.email" class="form-control form-control-lg" type="email" placeholder="Email" required />
             </fieldset>
             <fieldset class="form-group">
-              <input v-model="user.password" class="form-control form-control-lg" type="password" placeholder="Password" required />
+              <input v-model="user.password" class="form-control form-control-lg" type="password" placeholder="Password" required minlength="8"/>
             </fieldset>
             <button class="btn btn-lg btn-primary pull-xs-right">{{ isLogin ? 'Sign in' : 'Sign up' }}</button>
           </form>
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { login } from '@/api/user.js';
+import { login, register } from '@/api/user.js';
 export default {
   name: 'LoginIndex',
 
@@ -51,6 +51,7 @@ export default {
   data() {
     return {
       user: {
+        username: '',
         email: '',
         password: ''
       },
@@ -62,7 +63,7 @@ export default {
     async onSubmit() {
       try {
         // 提交表单请求登录
-        const { data } = await login({ user: this.user });
+        const { data } = this.isLogin ? await login({ user: this.user }) : await register({ user: this.user });
         console.log(data);
         // 保存用户的登陆状态
         // 跳转到首页
