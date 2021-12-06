@@ -39,6 +39,8 @@
 
 <script>
 import { login, register } from '@/api/user.js';
+// 尽在客户端加载 js-cookie
+const Cookie = process.client ? require('js-cookie') : undefined
 export default {
   name: 'LoginIndex',
 
@@ -63,10 +65,12 @@ export default {
     async onSubmit() {
       try {
         // 提交表单请求登录
-        const { data } = this.isLogin ? await login({ user: this.user }) : await register({ user: this.user });
-        // console.log(data);
+        const {data}  = this.isLogin ? await login({ user: this.user }) : await register({ user: this.user });
+        console.log(data);
         // 保存用户的登陆状态
         this.$store.commit('setUser', data.user)
+        // 为了防止刷新页面数据丢失,需要数据持久化
+        Cookie.set('user',JSON.stringify(data.user))
         // 跳转到首页
         this.$router.push('/');
       } catch (error) {
