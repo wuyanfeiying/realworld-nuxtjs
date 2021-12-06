@@ -66,7 +66,7 @@ export default {
       try {
         // 提交表单请求登录
         const {data}  = this.isLogin ? await login({ user: this.user }) : await register({ user: this.user });
-        console.log(data);
+        // console.log(data);
         // 保存用户的登陆状态
         this.$store.commit('setUser', data.user)
         // 为了防止刷新页面数据丢失,需要数据持久化

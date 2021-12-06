@@ -20,7 +20,7 @@ export const actions = {
     // 如果请求头有 Cookie
     if (req.headers.cookie) {
       const parsed = cookieparser.parse(req.headers.cookie);
-      console.log(parsed.user);
+      // console.log(parsed.user);
       try {
         user = JSON.parse(parsed.user);
         console.log(user);
